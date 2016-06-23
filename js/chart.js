@@ -33,7 +33,6 @@ var sunChart = {
         //Make the chart
         d3.json("test/data.json", function(error, dataset) {
 
-
             var dataRect = canvas.selectAll("rects")
                 .data(dataset)
                 .enter();
@@ -47,7 +46,7 @@ var sunChart = {
                 })
                 .attr("height", heightDay)
                 .attr("width", function(d) {
-                    return scaleBoxWidth(d.set)
+                    return scaleBoxWidth(maxDayLength - d.set);
                 })
                 .classed("rectDay", true);
         });
