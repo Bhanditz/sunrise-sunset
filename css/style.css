@@ -1,6 +1,8 @@
+.rect-background {
+  fill: #5f47c2; }
+
 .rectDay {
-  fill: yellow;
-  stroke: black; }
+  fill: yellow; }
 
 body {
-  background: "white"; }
+  background: #3a368f; }

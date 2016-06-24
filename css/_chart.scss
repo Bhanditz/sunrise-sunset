@@ -1,7 +1,12 @@
 $rectDay-fill: yellow;
 $rectDay-stroke: black;
+$rect-background-fill: #5f47c2;
+
+
+.rect-background {
+  fill: $rect-background-fill;
+}
 
 .rectDay {
   fill: $rectDay-fill;
-  stroke: $rectDay-stroke;
 }
