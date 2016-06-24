@@ -1,0 +1,38 @@
+{
+  "name": "sunrise-sunset",
+  "version": "1.0.0",
+  "description": "data vis to show sunrise/sunset times",
+  "main": "index.html",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "express" : "latest",
+    "request" : "latest",
+    "cheerio" : "latest",
+    "gulp-sass": "^2.3.2",
+    "gulp": "^3.9.1",
+    "browser-sync": "^2.13.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trainorpj/sunrise-sunset.git"
+  },
+  "keywords": [
+    "data",
+    "vis",
+    "d3",
+    "sunset",
+    "sunrise"
+  ],
+  "author": "PJ Trainor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trainorpj/sunrise-sunset/issues"
+  },
+  "homepage": "https://github.com/trainorpj/sunrise-sunset#readme"
+}
