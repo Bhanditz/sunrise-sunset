@@ -1,5 +1,7 @@
 var fs = require('fs');
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var month30 = ["January", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var month31 = ["January", "March", "May", "July", "August", "October", "December"];
 
 
 var array = fs.readFileSync('miami.txt').toString().split("\n");
@@ -20,26 +22,64 @@ for (i in array) {
     else {
         // Convert first entry into a number, which is the day of the month
         var day = parseInt(temp[0]);
+        //console.log(temp);
 
-        if (day < 29) {
-            // Make a list that doesn't include the first entry, which is the day
-            var timesInDay = temp.slice(1);
+        // Make a list that doesn't include the first entry, which is the day
+        var timesInDay = temp.slice(1);
 
+        if (day > 29) {
+          var longMonths = timesInDay.filter(
+            function(value){
+              return !(value === "");
+            })
+            .map(function(value){
+              if (value[0] === " ") {
+                return value.slice(1);
+              }
+              else{ return value;}
+            });
+          //console.log(longMonths);
+
+          for (j in longMonths) {
+            var riseSetString = longMonths[j]
+            if (day === 30){
+              var dayObj = makeDayEntry(day, riseSetString, month30);
+            }
+
+            else {
+              var dayObj = makeDayEntry(day, riseSetString, month31);
+            }
+
+            console.log(dayObj);
+            sunTimes.push(dayObj);
+          }
+        }
+
+        else {
             // Loops through 12 entries and does something
             for (j in timesInDay) {
-                // Takes the rise and set times, and creates an object with them
-                var tempObj = splitRiseSet(timesInDay[j]);
+                var riseSetString = timesInDay[j];
 
-                // Add some more attributes to each object
-                tempObj.month = months[(j % 12)];
-                tempObj.day = day;
-                console.log(tempObj);
+                var dayObj = makeDayEntry(day, riseSetString, months);
 
-                // Adjoin object to master list
-                sunTimes.push(tempObj);
+                console.log(dayObj);
+                sunTimes.push(dayObj);
+
             }
         }
     }
+}
+
+function makeDayEntry(day, val, month_arr) {
+
+  var monthLen = month_arr.length;
+  var tempObj = splitRiseSet(val);
+
+  tempObj.month = month_arr[(j % monthLen)];
+  tempObj.day = day;
+
+  return tempObj;
+
 }
 
 function splitRiseSet(str) {
