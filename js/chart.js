@@ -3,12 +3,12 @@ var sunChart = {
     drawChart: function() {
 
         //Dimensions of the main svg
-        var widthSvg = 800,
+        var widthSvg = 600,
             heightSvg = 900;
 
         //Height of each rectangle
-        var heightDay = 10;
-        var bufferDay = 1;
+        var heightDay = 2;
+        var bufferDay = 0.5;
 
         //Scaling section
         var maxDayLength = 60 * 24 - 1;
@@ -32,7 +32,7 @@ var sunChart = {
             });
 */
         //Make the chart
-        d3.json("test/data.json", function(error, dataset) {
+        d3.json("data/data.json", function(error, dataset) {
 
             var dataRect = canvas.selectAll("rects")
                 .data(dataset)
