@@ -28,34 +28,31 @@ for (i in array) {
         var timesInDay = temp.slice(1);
 
         if (day > 29) {
-          var longMonths = timesInDay.filter(
-            function(value){
-              return !(value === "");
-            })
-            .map(function(value){
-              if (value[0] === " ") {
-                return value.slice(1);
-              }
-              else{ return value;}
-            });
-          //console.log(longMonths);
+            var longMonths = timesInDay.filter(
+                    function(value) {
+                        return !(value === "");
+                    })
+                .map(function(value) {
+                    if (value[0] === " ") {
+                        return value.slice(1);
+                    } else {
+                        return value;
+                    }
+                });
+            //console.log(longMonths);
 
-          for (j in longMonths) {
-            var riseSetString = longMonths[j]
-            if (day === 30){
-              var dayObj = makeDayEntry(day, riseSetString, month30);
+            for (j in longMonths) {
+                var riseSetString = longMonths[j]
+                if (day === 30) {
+                    var dayObj = makeDayEntry(day, riseSetString, month30);
+                } else {
+                    var dayObj = makeDayEntry(day, riseSetString, month31);
+                }
+
+                console.log(dayObj);
+                sunTimes.push(dayObj);
             }
-
-            else {
-              var dayObj = makeDayEntry(day, riseSetString, month31);
-            }
-
-            console.log(dayObj);
-            sunTimes.push(dayObj);
-          }
-        }
-
-        else {
+        } else {
             // Loops through 12 entries and does something
             for (j in timesInDay) {
                 var riseSetString = timesInDay[j];
@@ -70,15 +67,26 @@ for (i in array) {
     }
 }
 
+sunTimes.sort(function(a,b){
+  if (a.month == b.month) {
+    return a.day - b.day;
+  } else {
+    return months.indexOf(a.month) - months.indexOf(b.month);
+  }
+
+});
+
+fs.writeFile("data.json", JSON.stringify(sunTimes, null, 4));
+
 function makeDayEntry(day, val, month_arr) {
 
-  var monthLen = month_arr.length;
-  var tempObj = splitRiseSet(val);
+    var monthLen = month_arr.length;
+    var tempObj = splitRiseSet(val);
 
-  tempObj.month = month_arr[(j % monthLen)];
-  tempObj.day = day;
+    tempObj.month = month_arr[(j % monthLen)];
+    tempObj.day = day;
 
-  return tempObj;
+    return tempObj;
 
 }
 
