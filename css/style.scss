@@ -1,10 +1,30 @@
 @import 'chart';
 
+$input-field-color: #522fa8;
+$input-text-color: #ffffff;
+
 body {
   background: #3a368f;
 }
 
 #vis {
-  width: 50%;
-  margin: 0 auto;
+  width:100%
+}
+
+#form-holder {
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+  input {
+    color: $input-text-color;
+    font-size: 1em;
+    background-color: $input-field-color;
+
+  }
+
+  .btn {
+    width:100%;
+    background-color: $input-field-color;
+  }
+
 }

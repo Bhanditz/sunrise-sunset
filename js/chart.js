@@ -3,7 +3,7 @@ var sunChart = {
     drawChart: function() {
 
         //Dimensions of the main svg
-        var widthSvg = 600,
+        var widthSvg = "100%",
             heightSvg = 900;
 
         //Height of each rectangle
