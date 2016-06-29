@@ -11,9 +11,12 @@ body {
   width:100%
 }
 
-#form-holder {
+.container {
   margin-top: 1em;
   margin-bottom: 1em;
+}
+
+#form-holder {
 
   input {
     color: $input-text-color;
@@ -26,5 +29,14 @@ body {
     width:100%;
     background-color: $input-field-color;
   }
+}
 
+#functionality-holder {
+  color: white;
+
+  .btn {
+    width:100%;
+    color: $input-text-color;
+    background-color: $input-field-color;
+  }
 }

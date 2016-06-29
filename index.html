@@ -14,21 +14,43 @@
 
 
     <div id="form-holder" class="container">
-      <div class="col-md-4">
-        <input class="form-control" type="text" placeholder="State">
+        <div class="row">
+            <div class="col-md-4">
+                <input class="form-control" type="text" placeholder="State">
+            </div>
+            <div class="col-md-4">
+                <input class="form-control" type="text" placeholder="City">
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="functionality-holder" class="container">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          Here's some Functionality
+        </div>
       </div>
-      <div class="col-md-4">
-        <input class="form-control" type="text" placeholder="City">
-      </div>
-      <div class="col-md-4">
-        <button type="submit" class="btn btn-default">Submit</button>
-      </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <button class="btn btn-default" id="lines-button">Toggle Lines</button>
+            </div>
+            <div class="col-sm-4">
+                <button class="btn btn-default" id="animate-button">Animate</button>
+            </div>
+            <div class="col-sm-4">
+                <button class="btn btn-default" id="axes-button">Toggle Axes</button>
+            </div>
+        </div class="row">
     </div>
 
     <div id="vis-holder" class="container">
-      <div class="row">
-        <div id="vis"></div>
-      </div>
+        <div class="row">
+            <div id="vis"></div>
+        </div>
     </div>
 
 

@@ -1,8 +1,15 @@
 .rect-background {
   fill: #5f47c2; }
 
-.rectDay {
+.rect-day {
   fill: yellow; }
+
+.axis-lines {
+  stroke-width: 1;
+  stroke: #a1a2ab; }
+
+.axis-text {
+  fill: #a1a2ab; }
 
 body {
   background: #3a368f; }
@@ -10,13 +17,22 @@ body {
 #vis {
   width: 100%; }
 
-#form-holder {
+.container {
   margin-top: 1em;
   margin-bottom: 1em; }
-  #form-holder input {
-    color: #ffffff;
-    font-size: 1em;
-    background-color: #522fa8; }
-  #form-holder .btn {
+
+#form-holder input {
+  color: #ffffff;
+  font-size: 1em;
+  background-color: #522fa8; }
+
+#form-holder .btn {
+  width: 100%;
+  background-color: #522fa8; }
+
+#functionality-holder {
+  color: white; }
+  #functionality-holder .btn {
     width: 100%;
+    color: #ffffff;
     background-color: #522fa8; }

@@ -2,11 +2,22 @@ $rectDay-fill: yellow;
 $rectDay-stroke: black;
 $rect-background-fill: #5f47c2;
 
+$axis-stroke-color: #a1a2ab;
+
 
 .rect-background {
   fill: $rect-background-fill;
 }
 
-.rectDay {
+.rect-day {
   fill: $rectDay-fill;
+}
+
+.axis-lines {
+  stroke-width: 1;
+  stroke: $axis-stroke-color;
+}
+
+.axis-text {
+  fill: $axis-stroke-color;
 }

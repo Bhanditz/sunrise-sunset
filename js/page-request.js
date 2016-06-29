@@ -154,6 +154,6 @@ var dataParse = {
 
 }
 
-dataLoad.loadString("FL", "miami", "../data/store.txt");
+dataLoad.loadString("NC", "brevard", "../data/store.txt");
 
 dataParse.writeObject("../data/store.txt", "../data/data.json");
