@@ -1,8 +1,9 @@
+/*
 var express = require('express');
 var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
-
+*/
 
 dataLoad = {
 
@@ -30,6 +31,14 @@ dataLoad = {
             // Write string to a text file
             fs.writeFile(path, data);
         });
+    },
+
+    updateForm: function(){
+
+      var state = document.getElementById('state-input').value;
+      var city = document.getElementById("city-input").value;
+
+      console.log(state, city);
     }
 };
 
@@ -154,6 +163,6 @@ var dataParse = {
 
 }
 
-dataLoad.loadString("NC", "brevard", "../data/store.txt");
+//dataLoad.loadString("NC", "brevard", "../data/store.txt");
 
-dataParse.writeObject("../data/store.txt", "../data/data.json");
+//dataParse.writeObject("../data/store.txt", "../data/data.json");

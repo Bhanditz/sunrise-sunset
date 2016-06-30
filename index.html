@@ -16,13 +16,13 @@
     <div id="form-holder" class="container">
         <div class="row">
             <div class="col-md-4">
-                <input class="form-control" type="text" placeholder="State">
+                <input id="state-input" class="form-control" type="text" placeholder="State">
             </div>
             <div class="col-md-4">
-                <input class="form-control" type="text" placeholder="City">
+                <input id="city-input" class="form-control" type="text" placeholder="City">
             </div>
             <div class="col-md-4">
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-default" onclick="dataLoad.updateForm()">Submit</button>
             </div>
         </div>
     </div>
@@ -58,6 +58,7 @@
 
     <script src="lib/d3/d3.js" charset="utf-8"></script>
     <script src="js/chart.js" charset="utf-8"></script>
+    <script src="js/page-request.js" charset="utf-8"></script>
 
     <script>
         sunChart.drawChart(sunChart.dim);
