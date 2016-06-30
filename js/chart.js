@@ -1,43 +1,25 @@
 var sunChart = {
 
-  dim: {
-      //Dimensions of the main svg
-      widthSvg: "100%",
-      heightVis: 900,
+    dim: {
+        //Dimensions of the main svg
+        widthSvg: "100%",
+        heightVis: 900,
 
-      // Buffer room for the text for the ticks
-      heightBuffer: 70,
+        // Buffer room for the text for the ticks
+        heightBuffer: 70,
 
-      //heightSvg: dim.heightVis + dim.heightBuffer,
+        //heightSvg: dim.heightVis + dim.heightBuffer,
 
-      //Height of each rectangle
-      heightDay: 2,
-      bufferDay: 0.5,
+        //Height of each rectangle
+        heightDay: 2,
+        bufferDay: 0.5,
 
-      //Scaling section
-      maxDayLength: 60 * 24 - 1
-  },
+        //Scaling section
+        maxDayLength: 60 * 24 - 1
+    },
 
     drawChart: function(dim) {
 
-      /*  var dim = {
-            //Dimensions of the main svg
-            widthSvg: "100%",
-            heightVis: 900,
-
-            // Buffer room for the text for the ticks
-            heightBuffer: 70,
-
-            //heightSvg: dim.heightVis + dim.heightBuffer,
-
-            //Height of each rectangle
-            heightDay: 2,
-            bufferDay: 0.5,
-
-            //Scaling section
-            maxDayLength: 60 * 24 - 1
-        };
-        */
         dim.heightSvg = dim.heightVis + dim.heightBuffer;
         dim.scaleBoxWidth = d3.scale.linear()
             .domain([0, dim.maxDayLength])
@@ -51,6 +33,22 @@ var sunChart = {
             .attr("height", dim.heightSvg)
             .attr("id", "vis-svg");
 
+        var eachDay = d3.range(365);
+
+        canvas.selectAll("rects")
+            .data(eachDay)
+            .enter()
+            .append("rect")
+            .attr("y", function(d) {
+                return dim.heightBuffer + d * (dim.heightDay + dim.bufferDay);
+            })
+            .attr({
+                x: 0,
+                width: dim.widthSvg,
+                height: dim.heightDay,
+                class: "rect-background"
+            });
+
 
         //Make the chart
         sunChart.update(dim);
@@ -59,14 +57,6 @@ var sunChart = {
     update: function(dim) {
         d3.json("data/data.json", function(error, dataset) {
 
-            var leftLine = d3.svg.line()
-                .x(function(d) {
-                    return dim.scaleBoxWidth(d.rise);
-                })
-                .y(function(d, i) {
-                    return dim.heightBuffer + i * (dim.heightDay + dim.bufferDay);
-                });
-
             var canvas = d3.select("#vis-svg");
 
             var dataRect = canvas.selectAll("rects")
@@ -74,17 +64,6 @@ var sunChart = {
                 .enter()
                 .append('g')
                 .classed("holder-rect", true);
-
-            dataRect.append("rect")
-                .attr("y", function(d, i) {
-                    return dim.heightBuffer + i * (dim.heightDay + dim.bufferDay);
-                })
-                .attr({
-                    x: 0,
-                    width: dim.widthSvg,
-                    height: dim.heightDay,
-                    class: "rect-background"
-                });
 
             dataRect.append("rect")
                 .attr("x", function(d) {
@@ -101,16 +80,29 @@ var sunChart = {
 
 
             // Axis times in military time
+            var avgRise = Math.floor(d3.mean(dataset, (d => d.rise)));
+            var avgSet = Math.floor(d3.mean(dataset, (d => d.set)));
+            var avgMid = Math.floor(d3.mean(dataset, (d => (d.rise + d.set) / 2)));
+
+            function avgText(num){
+              var hour = Math.floor(num / 60);
+              var time = (hour % 12 === 0 ? 12 : hour % 12) + ":" + (num % 60);
+              return time + (hour < 12 ? " am" : " pm");
+            }
+
+
             var tickTimes = [{
-                time: 6,
-                text: "6 am"
+                time: avgRise,
+                text: avgText(avgRise)
             }, {
-                time: 12,
-                text: "Noon"
+                time: avgMid,
+                text: avgText(avgMid)
             }, {
-                time: 18,
-                text: "6 pm"
+                time: avgSet,
+                text: avgText(avgSet)
             }];
+
+          //  console.log(tickTimes);
 
             var axes = canvas.selectAll("axes")
                 .data(tickTimes)
@@ -118,11 +110,11 @@ var sunChart = {
 
             axes.append("line")
                 .attr("x1", function(d) {
-                    return dim.scaleBoxWidth(d.time * 60);
+                    return dim.scaleBoxWidth(d.time);
                 })
                 .attr("y1", dim.heightBuffer)
                 .attr("x2", function(d) {
-                    return dim.scaleBoxWidth(d.time * 60);
+                    return dim.scaleBoxWidth(d.time);
                 })
                 .attr("y2", dim.heightSvg)
                 .classed("axis-lines", true);
@@ -132,7 +124,7 @@ var sunChart = {
                     return d.text;
                 })
                 .attr("x", function(d) {
-                    return dim.scaleBoxWidth(d.time * 60);
+                    return dim.scaleBoxWidth(d.time);
                 })
                 .attr("y", dim.heightBuffer - 20)
                 .attr("text-anchor", "middle")
