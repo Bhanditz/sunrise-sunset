@@ -18,7 +18,7 @@ var sunChart = {
         maxDayLength: 60 * 24 - 1
     },
 
-    drawChart: function(dim) {
+    drawChart: function(path, dim) {
 
         dim.heightSvg = dim.heightVis + dim.heightBuffer;
         dim.scaleBoxWidth = d3.scale.linear()
@@ -51,13 +51,17 @@ var sunChart = {
 
 
         //Make the chart
-        sunChart.update(dim);
+        sunChart.update(path, dim);
     },
 
-    update: function(dim) {
-        d3.json("data/data.json", function(error, dataset) {
+    update: function(path, dim) {
+        d3.json(path, function(error, dataset) {
 
             var canvas = d3.select("#vis-svg");
+
+            canvas.selectAll(".holder-rect").remove();
+            canvas.selectAll(".axis-text").remove();
+            canvas.selectAll(".axis-lines").remove();
 
             var dataRect = canvas.selectAll("rects")
                 .data(dataset)
@@ -80,14 +84,27 @@ var sunChart = {
 
 
             // Axis times in military time
-            var avgRise = Math.floor(d3.mean(dataset, (d => d.rise)));
-            var avgSet = Math.floor(d3.mean(dataset, (d => d.set)));
-            var avgMid = Math.floor(d3.mean(dataset, (d => (d.rise + d.set) / 2)));
+            var avgRise = Math.floor(d3.mean(dataset, function(d) {
+                return d.rise;
+            }));
+            var avgSet = Math.floor(d3.mean(dataset, function(d) {
+                return d.set;
+            }));
+            var avgMid = Math.floor(d3.mean(dataset, function(d) {
+                return (d.rise + d.set) / 2;
+            }));
 
-            function avgText(num){
-              var hour = Math.floor(num / 60);
-              var time = (hour % 12 === 0 ? 12 : hour % 12) + ":" + (num % 60);
-              return time + (hour < 12 ? " am" : " pm");
+            function avgText(num) {
+                var hour = Math.floor(num / 60);
+
+                // Determines if the number is one/two digits long
+                var mLen = function(num) {
+                    return num.toString().length;
+                };
+
+                var min = (mLen(num % 60) === 2 ? num % 60 : "0" + num % 60);
+                var time = (hour % 12 === 0 ? 12 : hour % 12) + ":" + min;
+                return time + (hour < 12 ? " am" : " pm");
             }
 
 
@@ -102,7 +119,7 @@ var sunChart = {
                 text: avgText(avgSet)
             }];
 
-          //  console.log(tickTimes);
+            //  console.log(tickTimes);
 
             var axes = canvas.selectAll("axes")
                 .data(tickTimes)
@@ -130,7 +147,31 @@ var sunChart = {
                 .attr("text-anchor", "middle")
                 .classed("axis-text", true);
         });
+    },
 
+    drop: function() {
+        d3.json("data/cities/ALL.json", function(error, dataset) {
+            var menu = d3.select("#state-input");
+
+            var options = menu.selectAll("options")
+                .data(dataset)
+                .enter();
+
+            options.append("option")
+                .text(function(d) {
+                    return d.city + ", " + d.state;
+                });
+        });
+
+    },
+
+    change: function() {
+        var input = document.getElementById("state-input").value;
+        var splt = input.split(", ");
+
+        var path = "data/cities/" + splt[0] + splt[1] + ".json";
+        console.log(path);
+        sunChart.update(path, sunChart.dim);
     }
 
 };

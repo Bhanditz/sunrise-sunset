@@ -1,15 +1,19 @@
-/*
+// This contains a node script that scrapes a url and parses data.
+// Not to be used on Github pages
+
 var express = require('express');
 var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
-*/
+
 
 dataLoad = {
 
-    loadString: function(state, place, path) {
+    loadString: function(state, place) {
         // Inputs state and city, goes to the appropriate link,
         //    then outputs the page as a string.
+
+        var path = "../data/store.txt";
 
         var url = "http://aa.usno.navy.mil/cgi-bin/aa_rstablew.pl?ID=AA&year=2016&task=0&state=" + state + " &place=" + place;
 
@@ -39,6 +43,8 @@ dataLoad = {
       var city = document.getElementById("city-input").value;
 
       console.log(state, city);
+
+      dataLoad.loadString("FL", "Miami");
     }
 };
 
