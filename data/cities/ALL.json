@@ -1,0 +1,11 @@
+[{
+    "url": "http://aa.usno.navy.mil/cgi-bin/aa_rstablew.pl?ID=AA&year=2016&task=0&state=FL &place=miami",
+    "city": "miami",
+    "state": "FL",
+    "path": "../data/cities/miamiFL.json"
+}, {
+    "url": "http://aa.usno.navy.mil/cgi-bin/aa_rstablew.pl?ID=AA&year=2016&task=0&state=NC &place=raleigh",
+    "city": "raleigh",
+    "state": "NC",
+    "path": "../data/cities/raleighNC.json"
+}]

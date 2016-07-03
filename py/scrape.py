@@ -1,4 +1,5 @@
 import requests
+import json
 from BeautifulSoup import BeautifulSoup
 
 months = {
@@ -21,11 +22,6 @@ def grabRawText(url):
 
     return str(data[0])
 
-def mapSpace(val):
-    if val[0] == " ":
-        return val[1:]
-    else:
-        return val
 
 def convertTime(n,m):
     return 60 * int(n) + int(m)
@@ -51,7 +47,13 @@ def dayEntry(day, val, month, index):
 
     return tempObj
 
+def comp(a, b):
+    m = months['all']
 
+    if a['month'] == b['month']:
+        return a['day'] - b['day']
+    else:
+        return m.index(a['month']) - m.index(b['month'])
 
 
 def textToDict(raw):
@@ -71,7 +73,7 @@ def textToDict(raw):
         if day > 29:
             # Format data entries
             filterSpace = filter(lambda x: x != "", timesInDay)
-            longMonths = map(mapSpace, filterSpace)
+            longMonths = map(lambda x: x[1:] if x[0] == " " else x, filterSpace)
 
             for j in range(len(longMonths)):
                 riseSetString = longMonths[j]
@@ -89,19 +91,41 @@ def textToDict(raw):
 
                 dayObj = dayEntry(day, sunString, months["all"], k)
                 new.append(dayObj)
-    print new
+
+    new.sort(comp)
+
+    return new
 
 
+cities = ["Miami,FL", "Raleigh,NC"]
+
+cities_json = []
+
+for c in cities:
+    splt = c.split(",")
+    city = splt[0].title()
+    state = splt[1].upper()
+
+    url = makeUrl(state, city)
+    path = "../data/cities/" + city + state +".json"
+
+    obj = {
+    "city": city,
+    "state": state,
+    "url": url,
+    "path": path
+    }
+
+    cities_json.append(obj)
+
+    rawData = grabRawText(url)
+    data = textToDict(rawData)
+
+    with open(path, "w") as outfile:
+        json.dump(data, outfile)
 
 
+cities_path = "../data/cities/ALL.json"
 
-
-
-
-
-
-
-url = makeUrl("FL", "miami")
-data = grabRawText(url)
-
-textToDict(data)
+with open(cities_path, "w") as out:
+    json.dump(cities_json, out)
