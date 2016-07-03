@@ -97,7 +97,15 @@ def textToDict(raw):
     return new
 
 
-cities = ["Miami,FL", "Raleigh,NC"]
+cities = ["Miami,FL",
+"Tallahassee,FL",
+"Savannah,GA",
+"Atlanta,GA",
+"Columbia,SC",
+"Latta,SC",
+"raleigh,NC",
+"charlotte,NC",
+"richmond,VA"]
 
 cities_json = []
 

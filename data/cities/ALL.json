@@ -1,11 +1,1 @@
-[{
-    "url": "http://aa.usno.navy.mil/cgi-bin/aa_rstablew.pl?ID=AA&year=2016&task=0&state=FL &place=miami",
-    "city": "miami",
-    "state": "FL",
-    "path": "../data/cities/miamiFL.json"
-}, {
-    "url": "http://aa.usno.navy.mil/cgi-bin/aa_rstablew.pl?ID=AA&year=2016&task=0&state=NC &place=raleigh",
-    "city": "raleigh",
-    "state": "NC",
-    "path": "../data/cities/raleighNC.json"
-}]
+[{"url": "http://aa.usno.navy.mil/cgi-bin/aa_rstablew.pl?ID=AA&year=2016&task=0&state=FL &place=Miami", "city": "Miami", "state": "FL", "path": "../data/cities/MiamiFL.json"}, {"url": "http://aa.usno.navy.mil/cgi-bin/aa_rstablew.pl?ID=AA&year=2016&task=0&state=FL &place=Tallahassee", "city": "Tallahassee", "state": "FL", "path": "../data/cities/TallahasseeFL.json"}, {"url": "http://aa.usno.navy.mil/cgi-bin/aa_rstablew.pl?ID=AA&year=2016&task=0&state=GA &place=Savannah", "city": "Savannah", "state": "GA", "path": "../data/cities/SavannahGA.json"}, {"url": "http://aa.usno.navy.mil/cgi-bin/aa_rstablew.pl?ID=AA&year=2016&task=0&state=GA &place=Atlanta", "city": "Atlanta", "state": "GA", "path": "../data/cities/AtlantaGA.json"}, {"url": "http://aa.usno.navy.mil/cgi-bin/aa_rstablew.pl?ID=AA&year=2016&task=0&state=SC &place=Columbia", "city": "Columbia", "state": "SC", "path": "../data/cities/ColumbiaSC.json"}, {"url": "http://aa.usno.navy.mil/cgi-bin/aa_rstablew.pl?ID=AA&year=2016&task=0&state=SC &place=Latta", "city": "Latta", "state": "SC", "path": "../data/cities/LattaSC.json"}, {"url": "http://aa.usno.navy.mil/cgi-bin/aa_rstablew.pl?ID=AA&year=2016&task=0&state=NC &place=Raleigh", "city": "Raleigh", "state": "NC", "path": "../data/cities/RaleighNC.json"}, {"url": "http://aa.usno.navy.mil/cgi-bin/aa_rstablew.pl?ID=AA&year=2016&task=0&state=NC &place=Charlotte", "city": "Charlotte", "state": "NC", "path": "../data/cities/CharlotteNC.json"}, {"url": "http://aa.usno.navy.mil/cgi-bin/aa_rstablew.pl?ID=AA&year=2016&task=0&state=VA &place=Richmond", "city": "Richmond", "state": "VA", "path": "../data/cities/RichmondVA.json"}]
